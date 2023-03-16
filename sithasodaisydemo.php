@@ -1141,13 +1141,16 @@ case "no":
     $msg = str_replace("|", "\r\n", $msg); 
     $msg = str_replace("\n.", "\n..", $msg); 
     // use wordwrap() if lines are longer than 70 characters 
-    $msg = wordwrap($msg,70,"\r\n"); 
+    //$msg = wordwrap($msg,70,"\r\n"); 
     //define from header 
     $headers = "From:" . $from . "\r\n"; 
-    $headers .= "Cc: " . $cc . "\r\n"; 
+	$headers .= "Reply-To:" . $from . "\r\n"; 
+	$headers .= "Cc: " . $cc . "\r\n"; 
     $headers .= "X-Mailer:PHP/" . phpversion(); 
     $headers .= "MIME-Version: 1.0\r\n"; 
-    $headers .= "Content-type: text/html\r\n"; 
+    //$headers .= "Content-type: text/html; charset=utf-8\r\n"; 
+	$headers .= "Content-Type: text/plain; charset=utf-8"."\r\n"; 
+	$headers .= "Content-Transfer-Encoding: 8bit"."\r\n"; 
     // send email 
     $response = (mail($to,$subject,$msg,$headers)) ? "success" : "failure"; 
     $output = json_encode(array("response" => $response)); 
