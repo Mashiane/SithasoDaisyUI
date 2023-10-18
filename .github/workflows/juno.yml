@@ -3,7 +3,8 @@ name: Deploy to Juno
 on:
   release:
     types: [released]
-
+  workflow_dispatch:
+  
 jobs:
   build:
     runs-on: ubuntu-latest
